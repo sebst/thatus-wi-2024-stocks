@@ -1,0 +1,45 @@
+name: Update Stocks Data
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "30 18 * * 1,2,3,4,5"
+
+jobs:
+  data_workflow:
+    name: Data workflow
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Download data, make plots and update README
+        run: |
+            python get_data.py
+            python make_plots.py
+            python update_readme.py
+
+      # Commit results back to repository
+      - uses: stefanzweifel/git-auto-commit-action@v5.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit_message: Update stock data
+          branch: main
+          commit_user_name: Stockdata Bot
+          commit_user_email: stockdatabot@bascodes.com
+          commit_author: Stockdata Bot <stockdatabot@bascodes.com>
