@@ -1,7 +1,9 @@
 beautifulsoup4==4.12.3
 certifi==2024.7.4
+cffi==1.17.1
 charset-normalizer==3.3.2
 contourpy==1.2.1
+curl_cffi==0.13.0
 cycler==0.12.1
 fonttools==4.53.1
 frozendict==2.4.4
@@ -17,6 +19,8 @@ pandas==2.2.2
 peewee==3.17.6
 pillow==10.4.0
 platformdirs==4.2.2
+protobuf==6.31.1
+pycparser==2.22
 pyparsing==3.1.2
 python-dateutil==2.9.0.post0
 pytz==2024.1
@@ -26,4 +30,5 @@ soupsieve==2.5
 tzdata==2024.1
 urllib3==2.2.2
 webencodings==0.5.1
+websockets==15.0.1
 yfinance==0.2.65
